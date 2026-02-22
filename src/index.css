@@ -1,0 +1,169 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 220 20% 97%;
+    --foreground: 222 47% 11%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 222 47% 11%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 47% 11%;
+
+    --primary: 215 90% 45%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 220 15% 93%;
+    --secondary-foreground: 222 47% 11%;
+
+    --muted: 220 15% 95%;
+    --muted-foreground: 220 10% 46%;
+
+    --accent: 185 85% 50%;
+    --accent-foreground: 222 47% 11%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 220 15% 90%;
+    --input: 220 15% 90%;
+    --ring: 215 90% 45%;
+
+    --radius: 0.75rem;
+
+    /* Brand palette */
+    --brand-blue: 215 90% 45%;
+    --brand-cyan: 185 85% 50%;
+    --brand-magenta: 320 90% 55%;
+    --brand-purple: 270 70% 50%;
+
+    /* Surfaces */
+    --surface: 0 0% 100%;
+    --surface-elevated: 220 20% 98%;
+
+    /* Gradients as CSS custom properties */
+    --gradient-brand: linear-gradient(135deg, hsl(215 90% 45%), hsl(185 85% 50%));
+    --gradient-accent: linear-gradient(135deg, hsl(320 90% 55%), hsl(270 70% 50%));
+    --gradient-hero: linear-gradient(135deg, hsl(215 90% 45%), hsl(270 70% 50%), hsl(320 90% 55%));
+    --gradient-glow: radial-gradient(ellipse at center, hsl(185 85% 50% / 0.15), transparent 70%);
+
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 215 90% 45%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 220 15% 95%;
+    --sidebar-accent-foreground: 222 47% 11%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 215 90% 45%;
+  }
+
+  .dark {
+    --background: 222 47% 6%;
+    --foreground: 220 20% 95%;
+
+    --card: 222 40% 9%;
+    --card-foreground: 220 20% 95%;
+
+    --popover: 222 40% 9%;
+    --popover-foreground: 220 20% 95%;
+
+    --primary: 185 85% 50%;
+    --primary-foreground: 222 47% 6%;
+
+    --secondary: 220 30% 15%;
+    --secondary-foreground: 220 20% 95%;
+
+    --muted: 220 30% 15%;
+    --muted-foreground: 220 15% 60%;
+
+    --accent: 185 85% 50%;
+    --accent-foreground: 222 47% 6%;
+
+    --destructive: 0 63% 31%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 220 30% 18%;
+    --input: 220 30% 18%;
+    --ring: 185 85% 50%;
+
+    --surface: 222 40% 9%;
+    --surface-elevated: 222 35% 12%;
+
+    --sidebar-background: 222 47% 6%;
+    --sidebar-foreground: 220 20% 95%;
+    --sidebar-primary: 185 85% 50%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 220 30% 15%;
+    --sidebar-accent-foreground: 220 20% 95%;
+    --sidebar-border: 220 30% 18%;
+    --sidebar-ring: 185 85% 50%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-feature-settings: "ss01", "ss02", "cv01";
+  }
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+@layer utilities {
+  .glass {
+    @apply bg-surface/80 backdrop-blur-xl border border-border/50;
+  }
+  .glass-strong {
+    @apply bg-surface/90 backdrop-blur-2xl border border-border/60;
+  }
+  .gradient-text {
+    @apply bg-clip-text text-transparent;
+    background-image: var(--gradient-brand);
+  }
+  .gradient-text-accent {
+    @apply bg-clip-text text-transparent;
+    background-image: var(--gradient-accent);
+  }
+  .gradient-border {
+    position: relative;
+  }
+  .gradient-border::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1px;
+    background: var(--gradient-brand);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+  }
+  .noise-bg {
+    position: relative;
+  }
+  .noise-bg::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    opacity: 0.03;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+  }
+  .section-padding {
+    @apply py-24 md:py-32 lg:py-40;
+  }
+  .container-tight {
+    @apply max-w-5xl mx-auto px-6;
+  }
+  .container-wide {
+    @apply max-w-7xl mx-auto px-6;
+  }
+}
